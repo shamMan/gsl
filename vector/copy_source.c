@@ -30,20 +30,21 @@ FUNCTION (gsl_vector, memcpy) (TYPE (gsl_vector) * dest,
     }
 
   {
-    const size_t src_stride = src->stride ;
-    const size_t dest_stride = dest->stride ;
-    size_t j;
+	 // const size_t src_stride = src->stride ;
+	 // const size_t dest_stride = dest->stride ;
+	 // size_t j;
 
-    for (j = 0; j < src_size; j++)
-      {
-        size_t k;
+	 // for (j = 0; j < src_size; j++)
+		//{
+		//  size_t k;
 
-        for (k = 0; k < MULTIPLICITY; k++) 
-          {
-            dest->data[MULTIPLICITY * dest_stride * j + k] 
-              = src->data[MULTIPLICITY * src_stride * j + k];
-          }
-      }
+		//  for (k = 0; k < MULTIPLICITY; k++)
+		//	{
+		//	  dest->data[MULTIPLICITY * dest_stride * j + k]
+		//		= src->data[MULTIPLICITY * src_stride * j + k];
+		//	}
+		//}
+	  memcpy(dest->data,src->data, src_size * sizeof(ATOMIC) * MULTIPLICITY);
   }
 
   return GSL_SUCCESS;
@@ -54,6 +55,10 @@ FUNCTION (gsl_vector, memcpy_scale) (TYPE (gsl_vector) * dest,
                                      const TYPE (gsl_vector) * src,
                                      const ATOMIC alpha)
 {
+	if (alpha == 1.0f)
+	{
+		return gsl_vector_memcpy(dest, src);
+	}
   const size_t src_size = src->size;
   const size_t dest_size = dest->size;
 

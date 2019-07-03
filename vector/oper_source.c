@@ -120,6 +120,10 @@ FUNCTION(gsl_vector, div) (TYPE(gsl_vector) * a, const TYPE(gsl_vector) * b)
 int 
 FUNCTION(gsl_vector, scale) (TYPE(gsl_vector) * a, const double x)
 {
+	if (x == 1.0f)
+	{
+		return GSL_SUCCESS;
+	}
   const size_t N = a->size;
   const size_t stride = a->stride;
   

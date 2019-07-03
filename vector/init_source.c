@@ -63,10 +63,10 @@ FUNCTION (gsl_vector, calloc) (const size_t n)
   /* initialize vector to zero; memset takes care of the padding bytes */
   memset(v->data, 0, MULTIPLICITY * n * sizeof(ATOMIC));
 
-  for (i = 0; i < MULTIPLICITY * n; i++)
-    {
-      v->data[i] = 0;
-    }
+  //for (i = 0; i < MULTIPLICITY * n; i++)
+  //  {
+  //    v->data[i] = 0;
+  //  }
 
   return v;
 }
@@ -178,12 +178,13 @@ FUNCTION (gsl_vector, set_zero) (TYPE (gsl_vector) * v)
   const size_t stride = v->stride;
   const BASE zero = ZERO ;
 
-  size_t i;
+  //size_t i;
 
-  for (i = 0; i < n; i++)
-    {
-      *(BASE *) (data + MULTIPLICITY * i * stride) = zero;
-    }
+  //for (i = 0; i < n; i++)
+  //  {
+  //    *(BASE *) (data + MULTIPLICITY * i * stride) = zero;
+  //  }
+  memset(data, 0, sizeof(BASE)*n);
 }
 
 int

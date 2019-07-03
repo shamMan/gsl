@@ -182,7 +182,8 @@ gsl_vector_get (const gsl_vector * v, const size_t i)
       GSL_ERROR_VAL ("index out of range", GSL_EINVAL, 0);
     }
 #endif
-  return v->data[i * v->stride];
+  //return v->data[i * v->stride];
+  return *(v->data + i);
 }
 
 INLINE_FUN
@@ -195,7 +196,8 @@ gsl_vector_set (gsl_vector * v, const size_t i, double x)
       GSL_ERROR_VOID ("index out of range", GSL_EINVAL);
     }
 #endif
-  v->data[i * v->stride] = x;
+  //v->data[i * v->stride] = x;
+  *(v->data + i)  = x;
 }
 
 INLINE_FUN
@@ -208,7 +210,8 @@ gsl_vector_ptr (gsl_vector * v, const size_t i)
       GSL_ERROR_NULL ("index out of range", GSL_EINVAL);
     }
 #endif
-  return (double *) (v->data + i * v->stride);
+  //return (double *) (v->data + i * v->stride);
+  return (double *)(v->data + i);
 }
 
 INLINE_FUN
@@ -221,7 +224,8 @@ gsl_vector_const_ptr (const gsl_vector * v, const size_t i)
       GSL_ERROR_NULL ("index out of range", GSL_EINVAL);
     }
 #endif
-  return (const double *) (v->data + i * v->stride);
+  //return (const double *) (v->data + i * v->stride);
+  return (const double *)(v->data + i);
 }
 #endif /* HAVE_INLINE */
 
